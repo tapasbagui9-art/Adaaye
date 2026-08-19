@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Support an Artisan — Adaaye</title>
+<meta name="description" content="Meet artisans across West Bengal's districts — their craft, culture, story and lifestyle — and support their work directly.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla:ital@0;1&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Mukta:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#f4eee0;
+    --ivory-2:#eee5d1;
+    --charcoal:#2e2a26;
+    --sindoor:#a4312a;
+    --indigo:#26364c;
+    --turmeric:#c1892f;
+    --clay:#8a6142;
+    --line: rgba(46,42,38,0.16);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ivory);
+    color:var(--charcoal);
+    font-family:'Mukta',sans-serif;
+    font-weight:400;
+    overflow-x:hidden;
+    position:relative;
+    min-height:100vh;
+  }
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      radial-gradient(900px 520px at 12% -8%, rgba(164,49,42,0.05), transparent 60%),
+      radial-gradient(800px 460px at 100% 6%, rgba(38,54,76,0.045), transparent 58%),
+      url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22160%22%20height%3D%22160%22%20viewBox%3D%220%200%20160%20160%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%238a6142%22%20stroke-width%3D%221%22%20stroke-opacity%3D%220.16%22%3E%0A%3Cpath%20d%3D%22M40%2020c14%200%2022%2012%2022%2026%200%2016-12%2022-22%2030-6%205-8%2011-4%2016%205%206%2015%204%2018-4%22%20stroke-linecap%3D%22round%22/%3E%0A%3Ccircle%20cx%3D%2240%22%20cy%3D%2220%22%20r%3D%222.2%22%20fill%3D%22%23a4312a%22%20stroke%3D%22none%22%20fill-opacity%3D%220.16%22/%3E%0A%3C/g%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%2326364c%22%20stroke-width%3D%221%22%20stroke-opacity%3D%220.12%22%20transform%3D%22translate%28120%2C100%29%20rotate%28160%29%22%3E%0A%3Cpath%20d%3D%22M0%200c14%200%2022%2012%2022%2026%200%2016-12%2022-22%2030-6%205-8%2011-4%2016%205%206%2015%204%2018-4%22%20stroke-linecap%3D%22round%22/%3E%0A%3C/g%3E%0A%3C/svg%3E'),
+      radial-gradient(rgba(46,42,38,0.045) 1px, transparent 1px);
+    background-size:auto, auto, 160px 160px, 3px 3px;
+    background-repeat:no-repeat, no-repeat, repeat, repeat;
+    pointer-events:none;
+    z-index:0;
+    opacity:.85;
+  }
+  h1,h2{font-family:'Cormorant Garamond', serif; font-weight:600; letter-spacing:-0.005em;}
+  h3,.serif{font-family:'Tiro Bangla', serif; font-weight:400;}
+  a{color:inherit;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 clamp(1.4rem,4vw,3rem); position:relative; z-index:2;}
+
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  .eyebrow{
+    font-family:'Tiro Bangla', serif;
+    font-style:italic;
+    font-size:.95rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--sindoor);
+    display:flex; align-items:center; gap:.6rem;
+  }
+  .eyebrow::before{content:""; width:22px; height:1px; background:var(--sindoor); display:inline-block;}
+  .eyebrow.center{justify-content:center;}
+  .eyebrow.center::before, .eyebrow.center::after{content:""; width:26px; height:1px; background:var(--sindoor); display:inline-block;}
+
+  /* ---------- header ---------- */
+  header.page-head{padding:3.4rem 0 3rem; text-align:center;}
+  header.page-head .back{
+    display:inline-block; margin-bottom:1.6rem; font-size:.8rem; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--clay); text-decoration:none;
+  }
+  header.page-head h1{font-size:clamp(2.5rem,6vw,4.2rem); line-height:1.05; margin-top:1rem;}
+  header.page-head h1 em{font-style:italic; color:var(--sindoor);}
+  header.page-head p.lede{max-width:38rem; margin:1.3rem auto 0; font-size:1.08rem; line-height:1.75; color:#4a443d;}
+
+  .mission{padding:0 0 3.5rem;}
+  .mission-grid{display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;}
+  .mission-grid p{font-size:1rem; line-height:1.8; color:#4a443d;}
+  .mission-grid p + p{margin-top:1rem;}
+  .mission-stats{display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem;}
+  .mission-stat{
+    background:rgba(255,252,244,0.6); border:1px solid var(--line); border-radius:8px;
+    padding:1.3rem 1rem; text-align:center;
+  }
+  .mission-stat b{display:block; font-family:'Cormorant Garamond',serif; font-size:2.1rem; color:var(--sindoor); line-height:1;}
+  .mission-stat span{display:block; margin-top:.5rem; font-size:.76rem; letter-spacing:.05em; color:var(--clay); text-transform:uppercase;}
+
+  /* ---------- district quick nav ---------- */
+  .district-nav{
+    position:sticky; top:0; z-index:30;
+    background:rgba(244,238,224,0.92); backdrop-filter:blur(8px);
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    padding:.9rem 0;
+  }
+  .district-nav .wrap{
+    display:flex; gap:.6rem; overflow-x:auto; scrollbar-width:none; padding-bottom:2px;
+  }
+  .district-nav .wrap::-webkit-scrollbar{display:none;}
+  .district-nav a{
+    flex:0 0 auto; font-size:.82rem; letter-spacing:.03em; white-space:nowrap;
+    padding:.45rem .9rem; border:1px solid var(--line); border-radius:999px;
+    text-decoration:none; color:var(--charcoal); transition:background .2s ease, color .2s ease, border-color .2s ease;
+  }
+  .district-nav a:hover{background:var(--sindoor); border-color:var(--sindoor); color:var(--ivory);}
+
+  /* ---------- district sections ---------- */
+  .district{padding:4.2rem 0; border-bottom:1px solid var(--line);}
+  .district:last-of-type{border-bottom:none;}
+  .district-top{display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:1rem; margin-bottom:.6rem;}
+  .district-tag{
+    font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ivory);
+    background:var(--indigo); padding:.35rem .8rem; border-radius:999px; white-space:nowrap;
+  }
+  .district h2{font-size:clamp(1.9rem,3.4vw,2.6rem); margin-top:.5rem;}
+  .district .craft-name{font-family:'Tiro Bangla',serif; font-style:italic; color:var(--sindoor); font-size:1.1rem;}
+
+  .district-body{display:grid; grid-template-columns:1.1fr 1fr; gap:3rem; margin-top:1.8rem;}
+  .district-copy h4{
+    font-size:.76rem; letter-spacing:.1em; text-transform:uppercase; color:var(--clay); margin-bottom:.5rem;
+  }
+  .district-copy h4:not(:first-child){margin-top:1.6rem;}
+  .district-copy p{font-size:.98rem; line-height:1.8; color:#4a443d;}
+
+  .district-art{
+    border-radius:10px; overflow:hidden; border:1px solid var(--line);
+    background:linear-gradient(155deg, rgba(164,49,42,0.09), rgba(38,54,76,0.07));
+    min-height:220px; position:relative; display:flex; align-items:center; justify-content:center;
+  }
+  .district-art svg{width:60%; height:auto; opacity:.9;}
+  .district-art .cap{
+    position:absolute; bottom:0; left:0; right:0; padding:.7rem 1rem;
+    font-size:.76rem; color:var(--charcoal); background:rgba(244,238,224,0.82);
+    border-top:1px solid var(--line);
+  }
+
+  .product-list{margin-top:2.2rem;}
+  .product-list h4{font-size:.76rem; letter-spacing:.1em; text-transform:uppercase; color:var(--clay); margin-bottom:1rem;}
+  .product-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1.1rem;}
+  .product-card{
+    border:1px solid var(--line); border-radius:8px; padding:1.1rem 1.1rem 1.2rem;
+    background:rgba(255,252,244,0.55);
+    display:flex; flex-direction:column;
+  }
+  .product-card h5{font-family:'Cormorant Garamond',serif; font-size:1.28rem; font-weight:600; margin-bottom:.4rem;}
+  .product-card p{font-size:.86rem; line-height:1.6; color:#4a443d; flex:1;}
+  .product-card .meta-row{
+    display:flex; justify-content:space-between; align-items:center; margin-top:.9rem;
+    padding-top:.8rem; border-top:1px dashed var(--line); font-size:.82rem;
+  }
+  .product-card .price{color:var(--sindoor); font-weight:600;}
+  .product-card .material{color:var(--clay); font-size:.74rem; text-transform:uppercase; letter-spacing:.04em;}
+
+  .district-cta{margin-top:1.8rem;}
+  .btn{
+    display:inline-block; padding:.85rem 1.6rem; border-radius:999px; font-size:.88rem;
+    text-decoration:none; transition:transform .2s ease, opacity .2s ease;
+  }
+  .btn-solid{background:var(--sindoor); color:var(--ivory);}
+  .btn-outline{border:1px solid var(--charcoal); color:var(--charcoal);}
+  .btn:hover{transform:translateY(-2px);}
+
+  /* ---------- closing ---------- */
+  .divider{display:flex; justify-content:center; padding:3.5rem 0;}
+  .divider svg{width:min(420px,72vw); height:34px;}
+
+  .support-cta{text-align:center; padding:0 0 5rem;}
+  .support-cta h2{font-size:clamp(1.9rem,4vw,2.8rem); max-width:36rem; margin:0 auto 1rem;}
+  .support-cta p{max-width:34rem; margin:0 auto 1.6rem; font-size:1rem; line-height:1.75; color:#4a443d;}
+  .support-cta .btn-row{display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;}
+
+  .note{
+    max-width:40rem; margin:0 auto 3rem; text-align:center; font-size:.82rem;
+    color:var(--clay); line-height:1.6; padding:0 1rem;
+  }
+
+  footer{text-align:center; padding:2.6rem 0 3rem; border-top:1px solid var(--line);}
+  footer a{color:var(--sindoor); text-decoration:underline; font-size:.92rem;}
+  footer p{font-size:.82rem; color:var(--clay); margin-top:.6rem;}
+
+  @media(max-width:860px){
+    .mission-grid{grid-template-columns:1fr;}
+    .district-body{grid-template-columns:1fr;}
+    .district-art{order:-1; min-height:180px;}
+    .product-grid{grid-template-columns:1fr;}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .reveal{transition:none; opacity:1; transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="page-head">
+  <div class="wrap">
+    <a href="index.html" class="back">&larr; Back to Adaaye</a><br>
+    <p class="eyebrow center">Support an Artisan</p>
+    <h1>Craft that still lives<br><em>in the villages</em> that made it.</h1>
+    <p class="lede">Across West Bengal, entire districts still carry a craft passed down through generations — a family's Patachitra scroll, a village's Dokra cast, a household's Kantha stitch. This is where we introduce those artisans, their culture, and the work you can bring home.</p>
+  </div>
+</header>
+
+<section class="mission">
+  <div class="wrap">
+    <div class="mission-grid">
+      <div class="reveal">
+        <p>Adaaye began with one folk artist and her brush. But Bengal's craft traditions run far wider than one studio — Dokra metal-casters in Bankura, Chhau mask-makers in Purulia, Baluchari weavers in Murshidabad, Patachitra painters in the villages around Pingla. Each district has its own material, its own myth, its own rhythm of work.</p>
+        <p>This page is our way of pointing you toward that wider map — the district, the craft, the people behind it, and the pieces you can order directly to support them. It's a growing page: as we visit more villages and confirm more artisan partners, we'll add their names, faces and workshops here.</p>
+      </div>
+      <div class="mission-stats reveal">
+        <div class="mission-stat"><b>8</b><span>Districts featured</span></div>
+        <div class="mission-stat"><b>20+</b><span>Craft pieces listed</span></div>
+        <div class="mission-stat"><b>100%</b><span>Ordered direct, no middleman</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<nav class="district-nav">
+  <div class="wrap">
+    <a href="#medinipur">Paschim Medinipur</a>
+    <a href="#bankura">Bankura</a>
+    <a href="#purulia">Purulia</a>
+    <a href="#birbhum">Birbhum</a>
+    <a href="#murshidabad">Murshidabad</a>
+    <a href="#nadia">Nadia</a>
+    <a href="#24parganas">South 24 Parganas</a>
+    <a href="#coochbehar">Cooch Behar</a>
+  </div>
+</nav>
+
+<!-- ============ PASCHIM MEDINIPUR — PATACHITRA ============ -->
+<section class="district" id="medinipur">
+  <div class="wrap">
+    <div class="district-top reveal">
+      <div>
+        <span class="district-tag">Paschim Medinipur</span>
+        <h2>Naya village, Pingla</h2>
+        <p class="craft-name">Patachitra — scroll painting &amp; song</p>
+      </div>
+    </div>
+    <div class="district-body">
+      <div class="district-copy reveal">
+        <h4>Culture &amp; story</h4>
+        <p>Naya is a village where nearly every household paints. Patachitra artists — known as <em>patuas</em> — work in long vertical scrolls, telling stories from myth, history and current events panel by panel, and singing the story aloud (the <em>pater gaan</em>) as they unroll it. Natural pigments are still ground from turmeric, lampblack, tamarind seed and stone.</p>
+        <h4>Lifestyle &amp; passion</h4>
+        <p>Patua families paint through the day in open courtyards, often with three generations working the same scroll — an elder mixing pigment, a parent outlining figures, a child filling colour. The craft is inseparable from performance; patuas remain travelling storytellers as much as painters, carrying scrolls from village to village during festival season.</p>
+      </div>
+      <div class="district-art reveal">
+        <svg viewBox="0 0 200 200" fill="none">
+          <rect x="30" y="20" width="18" height="160" rx="3" fill="none" stroke="#a4312a" stroke-width="2"/>
+          <path d="M60 40c20-6 30 8 46 4s24-10 40-4" stroke="#26364c" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M60 90c20-6 30 8 46 4s24-10 40-4" stroke="#c1892f" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M60 140c20-6 30 8 46 4s24-10 40-4" stroke="#8a6142" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <circle cx="70" cy="40" r="5" fill="#a4312a"/>
+          <circle cx="120" cy="90" r="5" fill="#26364c"/>
+          <circle cx="80" cy="140" r="5" fill="#c1892f"/>
+        </svg>
+        <div class="cap">Hand-painted scroll motif, natural pigment</div>
+      </div>
+    </div>
+    <div class="product-list">
+      <h4>Products from this district</h4>
+      <div class="product-grid">
+        <div class="product-card reveal">
+          <h5>Patachitra story scroll</h5>
+          <p>Narrative scroll on cloth-backed paper, natural pigment, telling a folk tale panel by panel. Sized for framing or wall display.</p>
+          <div class="meta-row"><span class="material">Cloth &amp; natural colour</span><span class="price">₹1,800 – ₹4,500</span></div>
+        </div>
+        <div class="product-card reveal">
+          <h5>Patachitra motif coaster set</h5>
+          <p>Set of 4 coasters hand-painted with fish, tree-of-life and bird motifs, sealed and varnished for daily use.</p>
+          <div class="meta-row"><span class="material">Wood, natural colour</span><span class="price">₹950</span></div>
+        </div>
+        <div class="product-card reveal">
+          <h5>Mini pat greeting card set</h5>
+          <p>Set of 6 hand-painted cards on handmade paper, each a miniature scene from a longer scroll story.</p>
+          <div class="meta-row"><span class="material">Handmade paper</span><span class="price">₹650</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="district-cta reveal">
+      <a href="https://instagram.com/_adaaye" target="_blank" rel="noopener" class="btn btn-solid">Message on Instagram to order</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BANKURA — DOKRA & TERRACOTTA ============ -->
+<section class="district" id="bankura">
+  <div class="wrap">
+    <div class="district-top reveal">
+      <div>
+        <span class="district-tag">Bankura</span>
+        <h2>Bikna &amp; Panchmura villages</h2>
+        <p class="craft-name">Dokra metal-casting &amp; Bankura terracotta</p>
+      </div>
+    </div>
+    <div class="district-body">
+      <div class="district-copy reveal">
+        <h4>Culture &amp; story</h4>
+        <p>Bikna's Dokra artisans use the 4,000-year-old lost-wax casting method — a clay core wrapped in wax thread, coated in clay again, then fired so the wax melts away and molten brass fills the void. Nearby Panchmura is home to the terracotta horse, the elongated clay figure that has become a symbol of Bengal's folk art on the national stage.</p>
+        <h4>Lifestyle &amp; passion</h4>
+        <p>Both crafts are worked in home courtyards using wood-fired kilns built by the families themselves. Dokra casters often say every piece is unique because the mould is destroyed to release it — no two casts are ever identical. Terracotta potters describe the horse as something they can shape with their eyes closed, taught hand-over-hand since childhood.</p>
+      </div>
+      <div class="district-art reveal">
+        <svg viewBox="0 0 200 200" fill="none">
+          <path d="M40 150c0-40 15-70 60-70s60 30 60 70" stroke="#8a6142" stroke-width="2" fill="none"/>
+          <path d="M60 90c-8-14-6-30 8-38" stroke="#a4312a" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M140 90c8-14 6-30-8-38" stroke="#a4312a" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <ellipse cx="100" cy="150" rx="60" ry="10" fill="none" stroke="#26364c" stroke-width="2"/>
+        </svg>
+        <div class="cap">Bankura horse silhouette, terracotta form</div>
+      </div>
+    </div>
+    <div class="product-list">
+      <h4>Products from this district</h4>
+      <div class="product-grid">
+        <div class="product-card reveal">
+          <h5>Dokra elephant figurine</h5>
+          <p>Lost-wax cast brass elephant with traditional coiled-wire detailing, tabletop size.</p>
+          <div class="meta-row"><span class="material">Cast brass</span><span class="price">₹1,200 – ₹2,600</span></div>
+        </div>
+        <div class="product-card reveal">
+          <h5>Bankura terracotta horse (medium)</h5>
+          <p>Hand-built, wood-fired terracotta horse in the classic Panchmura elongated form.</p>
+          <div class="meta-row"><span class="material">Terracotta</span><span class="price">₹1,500 – ₹3,200</span></div>
+        </div>
+        <div class="product-card reveal">
+          <h5>Dokra jewellery set</h5>
+          <p>Necklace and earring set cast in brass with tribal motif detailing, adjustable thread closure.</p>
+          <div class="meta-row"><span class="material">Cast brass, thread</span><span class="price">₹850</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="district-cta reveal">
+      <a href="https://instagram.com/_adaaye" target="_blank" rel="noopener" class="btn btn-solid">Message on Instagram to order</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PURULIA — CHHAU MASKS ============ -->
+<section class="district" id="purulia">
+  <div class="wrap">
+    <div class="district-top reveal">
+      <div>
+        <span class="district-tag">Purulia</span>
+        <h2>Charida village</h2>
+        <p class="craft-name">Chhau mask-making</p>
+      </div>
+    </div>
+    <div class="district-body">
+      <div class="district-copy reveal">
+        <h4>Culture &amp; story</h4>
+        <p>Charida is known as Bengal's "mask village" — almost every home makes the papier-mâché and clay masks used in Purulia Chhau, a masked martial dance-drama performed at Chaitra Sankranti depicting scenes from the Ramayana and Mahabharata. Each mask is built in layers over a clay mould, painted, and finished with foil, beads and feather ornaments.</p>
+        <h4>Lifestyle &amp; passion</h4>
+        <p>Mask-making is seasonal and communal — families work through the winter ahead of the Chhau festival season, drying layers of paper in the sun and finishing headdresses late into the night before a performance. Many mask-makers are also Chhau dancers or drummers themselves, so the mask is made by someone who knows exactly how it needs to move.</p>
+      </div>
+      <div class="district-art reveal">
+        <svg viewBox="0 0 200 200" fill="none">
+          <path d="M100 30c-38 0-58 30-58 62 0 34 24 58 58 58s58-24 58-58c0-32-20-62-58-62Z" stroke="#a4312a" stroke-width="2" fill="none"/>
+          <circle cx="78" cy="90" r="7" fill="#26364c"/>
+          <circle cx="122" cy="90" r="7" fill="#26364c"/>
+          <path d="M76 130c10 10 38 10 48 0" stroke="#c1892f" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M60 40c10-14 70-14 80 0" stroke="#8a6142" stroke-width="2" fill="none" stroke-linecap="round"/>
+        </svg>
+        <div class="cap">Chhau mask form, painted papier-mâché</div>
+      </div>
+    </div>
+    <div class="product-list">
+      <h4>Products from this district</h4>
+      <div class="product-grid">
+        <div class="product-card reveal">
+          <h5>Chhau wall mask — mythic figure</h5>
+          <p>Full-size hand-painted papier-mâché mask on clay mould, foil and bead detailing, ready to hang.</p>
+          <div class="meta-row"><span class="material">Papier-mâché, foil</span><span class="price">₹2,200 – ₹4,800</span></div>
+        </div>
+        <div class="product-card reveal">
+          <h5>Miniature Chhau mask (pair)</h5>
+          <p>Smaller decorative pair, hero and demon face, hand-painted for shelf or desk display.</p>
+          <div class="meta-row"><span class="material">Papier-mâché</span><span class="price">₹1,100</span></div>
+        </div>
+        <div class="product-card reveal">
+          <h5>Chhau mask keychain set</h5>
+          <p>Set of 3 miniature mask keychains, hand-painted, a lightweight way to carry the craft with you.</p>
+          <div class="meta-row"><span class="material">Papier-mâché</span><span class="price">₹450</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="district-cta reveal">
+      <a href="https://instagram.com/_adaaye" target="_blank" rel="noopener" class="btn btn-solid">Message on Instagram to order</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BIRBHUM — KANTHA ============ -->
+<section class="district" id="birbhum">
+  <div class="wrap">
+    <div class="district-top reveal">
+      <div>
+        <span class="district-tag">Birbhum</span>
+        <h2>Villages around Santiniketan</h2>
+        <p class="craft-name">Kantha embroidery</p>
+      </div>
+    </div>
+    <div class="district-body">
+      <div class="district-copy reveal">
+        <h4>Culture &amp; story</h4>
+        <p>Kantha began as a way to give old, layered cotton saris and dhotis a second life — quilted together with running stitch into blankets, wraps and covers. In Birbhum, that running stitch has grown into fine figurative embroidery: birds, boats, trees of life and courtyard scenes worked entirely by hand, thread pulled from the borders of old saris.</p>
+        <h4>Lifestyle &amp; passion</h4>
+        <p>Kantha is largely stitched by women, often in groups — verandah conversations timed to the rhythm of the needle. A single large kantha can take weeks to months of evening work between household duties, which is part of why makers describe it less as a craft and more as a diary stitched in thread.</p>
+      </div>
+      <div class="district-art reveal">
+        <svg viewBox="0 0 200 200" fill="none">
+          <rect x="30" y="30" width="140" height="140" rx="4" fill="none" stroke="#8a6142" stroke-width="1.4" stroke-dasharray="4 5"/>
+          <path d="M50 100c20-20 40 20 60 0s40-20 60 0" stroke="#a4312a" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M50 70c20-14 40 14 60 0s40-14 60 0" stroke="#26364c" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+          <path d="M50 130c20-14 40 14 60 0s40-14 60 0" stroke="#c1892f" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+        </svg>
+        <div class="cap">Running-stitch kantha pattern</div>
+      </div>
+    </div>
+    <div class="product-list">
+      <h4>Products from this district</h4>
+      <div class="product-grid">
+        <div class="product-card reveal">
+          <h5>Kantha-stitched throw</h5>
+          <p>Reversible cotton throw, hand-quilted with running stitch in a tree-of-life pattern.</p>
+          <div class="meta-row"><span class="material">Cotton, cotton thread</span><span class="price">₹2,600 – ₹4,200</span></div>
+        </div>
+        <div class="product-card reveal">
+          <h5>Kantha cushion cover (pair)</h5>
+          <p>Hand-embroidered cushion covers, bird and floral motifs, cotton backing.</p>
+          <div class="meta-row"><span class="material">Cotton</span><span class="price">₹1,100</span></div>
+        </div>
+        <div class="product-card reveal">
+          <h5>Kantha embroidered stole</h5>
+          <p>Lightweight cotton stole with fine running-stitch border work, everyday wear.</p>
+          <div class="meta-row"><span class="material">Cotton</span><span class="price">₹1,450</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="district-cta reveal">
+      <a href="https://instagram.com/_adaaye" target="_blank" rel="noopener" class="btn btn-solid">Message on Instagram to order</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MURSHIDABAD — BALUCHARI SILK ============ -->
+<section class="district" id="murshidabad">
+  <div class="wrap">
+    <div class="district-top reveal">
+      <div>
+        <span class="district-tag">Murshidabad</span>
+        <h2>Bishnupur weaving lineage, Murshidabad looms</h2>
+        <p class="craft-name">Baluchari silk weaving</p>
+      </div>
+    </div>
+    <div class="district-body">
+      <div class="district-copy reveal">
+        <h4>Culture &amp; story</h4>
+        <p>Baluchari sarees are woven on jacquard looms with pallus depicting entire mythological or courtly scenes — chariots, musicians, dancers — worked directly into the silk without embroidery. The craft moved to the Bishnupur–Murshidabad weaving belt generations ago and has stayed a family trade, with pattern cards (the loom's "memory") often passed down like heirlooms.</p>
+        <h4>Lifestyle &amp; passion</h4>
+        <p>A single Baluchari saree can take a week or more on the loom, with weavers working in small home workshops, often two people to a loom for the heavier jacquard pulls. Weavers speak of the pallu scene as the part they take the most pride in — it's the part a saree is remembered for.</p>
+      </div>
+      <div class="district-art reveal">
+        <svg viewBox="0 0 200 200" fill="none">
+          <rect x="40" y="40" width="120" height="120" fill="none" stroke="#c1892f" stroke-width="1.4"/>
+          <path d="M40 70h120M40 100h120M40 130h120" stroke="#8a6142" stroke-width="1" stroke-dasharray="2 4"/>
+          <path d="M70 40v120M100 40v120M130 40v120" stroke="#8a6142" stroke-width="1" stroke-dasharray="2 4"/>
+          <circle cx="100" cy="100" r="18" fill="none" stroke="#a4312a" stroke-width="2"/>
+        </svg>
+        <div class="cap">Jacquard grid, Baluchari pallu motif</div>
+      </div>
+    </div>
+    <div class="product-list">
+      <h4>Products from this district</h4>
+      <div class="product-grid">
+        <div class="product-card reveal">
+          <h5>Baluchari silk saree</h5>
+          <p>Handloom silk saree with mythological pallu scene, jacquard-woven, festive weight.</p>
+          <div class="meta-row"><span class="material">Silk</span><span class="price">₹6,500 – ₹14,000</span></div>
+        </div>
+        <div class="product-card reveal">
+          <h5>Baluchari silk dupatta</h5>
+          <p>Lighter-weight silk dupatta carrying the same figurative pallu weaving in miniature.</p>
+          <div class="meta-row"><span class="material">Silk</span><span class="price">₹2,800</span></div>
+        </div>
+        <div class="product-card reveal">
+          <h5>Woven silk table runner</h5>
+          <p>Jacquard silk runner adapted from Baluchari motifs for the everyday table.</p>
+          <div class="meta-row"><span class="material">Silk blend</span><span class="price">₹1,600</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="district-cta reveal">
+      <a href="https://instagram.com/_adaaye" target="_blank" rel="noopener" class="btn btn-solid">Message on Instagram to order</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NADIA — TERRACOTTA DOLLS ============ -->
+<section class="district" id="nadia">
+  <div class="wrap">
+    <div class="district-top reveal">
+      <div>
+        <span class="district-tag">Nadia</span>
+        <h2>Krishnanagar</h2>
+        <p class="craft-name">Clay doll-making</p>
+      </div>
+    </div>
+    <div class="district-body">
+      <div class="district-copy reveal">
+        <h4>Culture &amp; story</h4>
+        <p>Krishnanagar's clay artists are known for hyper-realistic figures — fruit-sellers, farmers, freedom fighters, festival deities — modelled in unglazed and painted clay with a level of detail once commissioned by royal courts. The tradition dates back over 200 years and remains centred on a handful of artisan lanes in the town.</p>
+        <h4>Lifestyle &amp; passion</h4>
+        <p>Each figure is built in stages — armature, rough clay, fine detailing, sun-drying, painting — often across several family members working different stages of the same workshop. Artisans describe the goal as making clay "breathe": a wrinkle, a fold of cloth, an expression caught mid-sentence.</p>
+      </div>
+      <div class="district-art reveal">
+        <svg viewBox="0 0 200 200" fill="none">
+          <circle cx="100" cy="70" r="26" fill="none" stroke="#8a6142" stroke-width="2"/>
+          <path d="M60 170c0-40 18-64 40-64s40 24 40 64" stroke="#a4312a" stroke-width="2" fill="none"/>
+          <path d="M80 60c6-8 34-8 40 0" stroke="#26364c" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+        </svg>
+        <div class="cap">Krishnanagar figurative clay form</div>
+      </div>
+    </div>
+    <div class="product-list">
+      <h4>Products from this district</h4>
+      <div class="product-grid">
+        <div class="product-card reveal">
+          <h5>Krishnanagar clay figure — village life</h5>
+          <p>Hand-modelled, hand-painted clay figure from everyday village life, fine detailing.</p>
+          <div class="meta-row"><span class="material">Terracotta clay</span><span class="price">₹1,800 – ₹3,600</span></div>
+        </div>
+        <div class="product-card reveal">
+          <h5>Miniature clay fruit-seller set</h5>
+          <p>Set of 3 miniature painted clay figures depicting everyday trades.</p>
+          <div class="meta-row"><span class="material">Terracotta clay</span><span class="price">₹1,200</span></div>
+        </div>
+        <div class="product-card reveal">
+          <h5>Clay decorative bowl</h5>
+          <p>Hand-shaped and painted decorative bowl in the Krishnanagar finishing style.</p>
+          <div class="meta-row"><span class="material">Terracotta clay</span><span class="price">₹750</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="district-cta reveal">
+      <a href="https://instagram.com/_adaaye" target="_blank" rel="noopener" class="btn btn-solid">Message on Instagram to order</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOUTH 24 PARGANAS — SHOLA PITH ============ -->
+<section class="district" id="24parganas">
+  <div class="wrap">
+    <div class="district-top reveal">
+      <div>
+        <span class="district-tag">South 24 Parganas</span>
+        <h2>Sundarbans-fringe villages</h2>
+        <p class="craft-name">Shola pith craft</p>
+      </div>
+    </div>
+    <div class="district-body">
+      <div class="district-copy reveal">
+        <h4>Culture &amp; story</h4>
+        <p>Shola is a soft, milky-white wetland reed that <em>malakars</em> (garland-makers) carve into astonishingly fine ornamental work — bridal <em>topors</em> and <em>mukuts</em>, Durga Puja idol decorations, and delicate flower and bird models. The material is light enough to float and carved with nothing more than a thin blade.</p>
+        <h4>Lifestyle &amp; passion</h4>
+        <p>Work is highly seasonal, peaking hard in the weeks before Durga Puja and the wedding season, when malakar households work near round-the-clock on temple and pandal ornamentation. Outside season, the same fine-blade skill turns to smaller decorative pieces and export work.</p>
+      </div>
+      <div class="district-art reveal">
+        <svg viewBox="0 0 200 200" fill="none">
+          <path d="M100 160c-40-10-50-50-30-80 8 20 18 26 30 26s22-6 30-26c20 30 10 70-30 80Z" fill="none" stroke="#8a6142" stroke-width="2"/>
+          <path d="M100 40c0 20 0 30 0 46" stroke="#c1892f" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <div class="cap">Shola pith carved floral form</div>
+      </div>
+    </div>
+    <div class="product-list">
+      <h4>Products from this district</h4>
+      <div class="product-grid">
+        <div class="product-card reveal">
+          <h5>Shola pith flower bouquet</h5>
+          <p>Hand-carved everlasting flower arrangement in white shola pith, delicate petal detailing.</p>
+          <div class="meta-row"><span class="material">Shola pith</span><span class="price">₹900</span></div>
+        </div>
+        <div class="product-card reveal">
+          <h5>Decorative shola pith bird pair</h5>
+          <p>Carved bird figures on a wooden base, traditional festive ornament style.</p>
+          <div class="meta-row"><span class="material">Shola pith, wood</span><span class="price">₹1,100</span></div>
+        </div>
+        <div class="product-card reveal">
+          <h5>Shola pith wall art panel</h5>
+          <p>Framed relief panel with carved floral and paisley motifs.</p>
+          <div class="meta-row"><span class="material">Shola pith</span><span class="price">₹1,600</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="district-cta reveal">
+      <a href="https://instagram.com/_adaaye" target="_blank" rel="noopener" class="btn btn-solid">Message on Instagram to order</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COOCH BEHAR — SITALPATI ============ -->
+<section class="district" id="coochbehar">
+  <div class="wrap">
+    <div class="district-top reveal">
+      <div>
+        <span class="district-tag">Cooch Behar</span>
+        <h2>North Bengal wetland belts</h2>
+        <p class="craft-name">Sitalpati (cane mat) weaving</p>
+      </div>
+    </div>
+    <div class="district-body">
+      <div class="district-copy reveal">
+        <h4>Culture &amp; story</h4>
+        <p>Sitalpati — literally "cool mat" — is woven from thin strips of <em>murta</em> cane, split and polished until pliable enough to weave as fine as cloth. Traditionally used as bedding and floor mats through Bengal's humid summers, the weave is now shaped into bags, coasters and modern home pieces.</p>
+        <h4>Lifestyle &amp; passion</h4>
+        <p>Weavers first harvest and process the cane themselves — splitting, boiling, sun-drying and shaving each strip by hand before a single row is woven. It's slow, seasonal, river-adjacent work, and weavers describe a good mat as one that stays cool to the touch no matter the season.</p>
+      </div>
+      <div class="district-art reveal">
+        <svg viewBox="0 0 200 200" fill="none">
+          <path d="M30 60h140M30 90h140M30 120h140M30 150h140" stroke="#8a6142" stroke-width="2"/>
+          <path d="M50 40v140M85 40v140M120 40v140M155 40v140" stroke="#c1892f" stroke-width="2"/>
+        </svg>
+        <div class="cap">Sitalpati woven cane pattern</div>
+      </div>
+    </div>
+    <div class="product-list">
+      <h4>Products from this district</h4>
+      <div class="product-grid">
+        <div class="product-card reveal">
+          <h5>Sitalpati floor mat</h5>
+          <p>Fine hand-split cane mat, natural finish, traditional summer bedding weave.</p>
+          <div class="meta-row"><span class="material">Murta cane</span><span class="price">₹1,400 – ₹2,800</span></div>
+        </div>
+        <div class="product-card reveal">
+          <h5>Sitalpati tote bag</h5>
+          <p>Cane-woven tote with cotton lining, a modern piece built from the traditional weave.</p>
+          <div class="meta-row"><span class="material">Murta cane, cotton</span><span class="price">₹1,100</span></div>
+        </div>
+        <div class="product-card reveal">
+          <h5>Sitalpati table mat set</h5>
+          <p>Set of 6 woven cane table mats, natural sheen, heat-resistant.</p>
+          <div class="meta-row"><span class="material">Murta cane</span><span class="price">₹850</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="district-cta reveal">
+      <a href="https://instagram.com/_adaaye" target="_blank" rel="noopener" class="btn btn-solid">Message on Instagram to order</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 560 44" fill="none">
+    <path d="M10 22c30-20 60 20 90 0s60-20 90 0 60 20 90 0 60-20 90 0 60 20 90 0" stroke="#8a6142" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+    <circle cx="10" cy="22" r="2.4" fill="#a4312a"/>
+    <circle cx="190" cy="22" r="2.4" fill="#a4312a"/>
+    <circle cx="370" cy="22" r="2.4" fill="#a4312a"/>
+    <circle cx="550" cy="22" r="2.4" fill="#a4312a"/>
+  </svg>
+</div>
+
+<section class="support-cta">
+  <div class="wrap">
+    <p class="eyebrow center reveal">Know an artisan?</p>
+    <h2 class="reveal">Help us grow this list, district by district.</h2>
+    <p class="reveal">If you're an artisan, work with one, or simply know a craft family from your district that deserves to be here — write to us. We're building this page one verified visit and one honest story at a time.</p>
+    <div class="btn-row reveal">
+      <a href="https://instagram.com/_adaaye" target="_blank" rel="noopener" class="btn btn-solid">Message on Instagram</a>
+      <a href="index.html#shop" class="btn btn-outline">See the current shop</a>
+    </div>
+  </div>
+</section>
+
+<p class="note">Craft descriptions, lifestyle notes and prices on this page are indicative starting information, compiled to introduce each district's tradition — not yet tied to a confirmed, named artisan partner or live inventory. We're onboarding artisans district by district; details here will be updated with real names, workshops and photographs as each partnership is confirmed.</p>
+
+<footer>
+  <a href="https://instagram.com/_adaaye" target="_blank" rel="noopener">@_adaaye on Instagram</a>
+  <p>&copy; 2026 Adaaye. Painted by hand, always.</p>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  },{threshold:.15});
+  revealEls.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
